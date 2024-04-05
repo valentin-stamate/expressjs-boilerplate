@@ -1,9 +1,11 @@
 import express = require("express");
-import {config} from "dotenv";
+import { config } from "dotenv";
+import { Endpoint } from "endpoints";
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
-import {Middleware} from "./middleware/middleware";
+import { UserController } from "./controller/user.controller";
+import { Middleware } from "./middleware/middleware";
 
 config();
 const env = process.env;
@@ -33,9 +35,7 @@ if (process.env.NODE_ENV === 'production') {
  *                               Register all REST routes
  ***********************************************************************************/
 
-app.get('/', (req, res) => {
-    res.end('Hello word!')
-});
+app.get(Endpoint.USERS, Middleware.visitorMiddleware, UserController.getUsers);
 
 /************************************************************************************
  *                               Express Error Handling

@@ -1,8 +1,8 @@
-import {Service} from "../service/service";
+import {UserService} from "service/user.service";
 
 describe('Demo service test', () => {
-    test('sum of a and b should work', () => {
-        const result = Service.sum(5, 7);
+    test('sum of a and b should work', async () => {
+        const result = await UserService.getUsers();
 
         expect(result).toEqual(12);
     });
